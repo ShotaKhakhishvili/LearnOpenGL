@@ -17,4 +17,6 @@ public:
 
 	void Activate() const;
 	void Delete() const;
+
+	void compileErrors(unsigned int shader, const char* type);
 };
