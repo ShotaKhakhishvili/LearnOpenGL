@@ -2,9 +2,9 @@
 
 EBO::EBO(GLuint* indices, GLsizeiptr size)
 {
-	glGenBuffers(1, &ID);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);
+	glGenBuffers(1, &ID);														// Creating a buffer on the GPU
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);									// Binding the buffer as a type GL_ELEMENG_ARRAY_BUFFER
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);		// Attaching the data to the buffer
 }
 
 void EBO::Bind()

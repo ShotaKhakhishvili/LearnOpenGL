@@ -27,34 +27,37 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
 	//Fragment Shader source code
 	const char* fragmentShaderSource = fragShader.c_str();
 
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-	glCompileShader(vertexShader);
-	compileErrors(vertexShader, "VERTEX");
+	// Creating a vertex shader
+	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);				//	Creating a vertex shader on the GPU
+	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);		//	Set the source code for the shader
+	glCompileShader(vertexShader);										//	Compiling the source
+	compileErrors(vertexShader, "VERTEX");								//	Checking for errors
 
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-	glCompileShader(fragmentShader);
-	compileErrors(fragmentShader, "FRAGMENT");
+	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);			//	Creating a fragment shader on the GPU
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);	//	Set the source code for the shader
+	glCompileShader(fragmentShader);									//  Compiling the source
+	compileErrors(fragmentShader, "FRAGMENT");							//	Checking for errors
+		
+	ID = glCreateProgram();												//  Allocating a shader program
+	glAttachShader(ID, vertexShader);									//  Attaching a vertex shader to the program
+	glAttachShader(ID, fragmentShader);									//	Attaching a fragment shader to the program
+	glLinkProgram(ID);													//  Linking the attached shaders into a complete program
+	compileErrors(ID, "PROGRAM");										//  Checking for an error when linking
 
-	ID = glCreateProgram();
-	glAttachShader(ID, vertexShader);
-	glAttachShader(ID, fragmentShader);
-	glLinkProgram(ID);
-	compileErrors(ID, "PROGRAM");
 
+	// Deleting the shaders, since they are no longer used.
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
 }
 
 void Shader::Activate() const
 {
-	glUseProgram(ID);
+	glUseProgram(ID);	// Set the program as the current one
 }
 
 void Shader::Delete() const
 {
-	glDeleteProgram(ID);
+	glDeleteProgram(ID);	// Deallocate the program
 }
 
 void Shader::compileErrors(unsigned int shader, const char* type)

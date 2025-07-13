@@ -2,15 +2,15 @@
 
 VAO::VAO()
 {
-	glGenVertexArrays(1, &ID);
+	glGenVertexArrays(1, &ID);		// Creating a Vertex Array on the GPU
 }
 
 void VAO::LinkAttrib(VBO VBO, GLuint layout, GLuint numComponents, GLenum type, GLsizeiptr stride, void* offset)
 {
-	VBO.Bind();
-	glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);
-	glEnableVertexAttribArray(layout);
-	VBO.UnBind();
+	VBO.Bind();																			// Binding a Vertex Buffer Object
+	glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);		// Defining the vertex attributes for the given layout
+	glEnableVertexAttribArray(layout);													// Enabling the vertex attribute array at the given location
+	VBO.UnBind();																		// Unbind the VBO
 }
 
 void VAO::Bind()

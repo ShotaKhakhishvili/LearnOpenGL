@@ -1,25 +1,24 @@
 #include <iostream>
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <stb/stb_image.h>
 #include <chrono>
 #include "shader.h"
+#include "texture.h"
 #include "VAO.h"
 
 GLfloat vertices[] =
 {
-	//---------------------COORDS---------------------//	//---COLORS----//
-	-0.5f,			-0.5f * float(sqrt(3)) / 3,		0.0f,	1.0f, 0.0f, 0.0f,		// Lower left corner
-	 0.5f,			-0.5f * float(sqrt(3)) / 3,		0.0f,	1.0f, 0.0f, 0.0f,		// Lower right corner
-	 0.0f,			 0.5f * float(sqrt(3)) * 2 / 3, 0.0f,	1.0f, 0.0f, 0.0f,		// Upper corner
-	-0.5f / 2,		 0.5f * float(sqrt(3)) / 6,		0.0f,	0.0f, 0.0f, 1.0f,		// Inner left
-	 0.5f / 2,		 0.5f * float(sqrt(3)) / 6,		0.0f,	0.0f, 0.0f, 1.0f,		// Inner right
-	 0.0f,			-0.5f * float(sqrt(3)) / 3,		0.0f,	0.0f, 0.0f, 1.0f		// Inner down
+	//---------------------COORDS---------------------//	//---COLORS----//	  //--Tex Coords--//
+	-0.75f,			-0.5f,		0.0f,						1.0f, 1.0f, 1.0f,		0.0f,	0.0f,			// Lower Left
+	 0.75f,			-0.5f,		0.0f,						1.0f, 0.0f, 0.0f,		1.0f,	0.0f,			// Lower right 
+	-0.5f,			 0.5f,		0.0f,						0.0f, 0.0f, 1.0f,		0.0f,	1.0f,			// Upper left 
+	 0.5f,			 0.5f ,		0.0f,						0.0f, 0.0f, 0.0f,		1.0f,	1.0f,			// Upper right
 };
 
 GLuint indices[] = {
-	0, 3, 5, // Lower left triangle
-	3, 2, 4, // Upper triangle
-	5, 4, 1  // Lower right triangle
+	0, 2, 1,
+	3, 2, 1, 
 };
 
 template<typename T>
@@ -36,6 +35,7 @@ struct vec3
 vec3<GLfloat> offset = vec3<GLfloat>(0.0f, 0.0f, 0.0f);
 bool moveDir = true;
 long long last;
+float moveSpeed = 0.001f;
 
 void moveOffset()
 {
@@ -50,11 +50,11 @@ void moveOffset()
 
 	if (moveDir)
 	{
-		newVal = std::min(.5f, offset.x + ((float)(nowms - last)) / 500);
+		newVal = std::min(.5f, offset.x + ((float)(nowms - last)) * moveSpeed);
 	}
 	else
 	{
-		newVal = std::max(-.5f, offset.x - ((float)(nowms - last)) / 500);
+		newVal = std::max(-.5f, offset.x - ((float)(nowms - last)) * moveSpeed);
 	}
 
 	if (newVal == 0.5f || newVal == -0.5f)moveDir = !moveDir;
@@ -100,8 +100,9 @@ int main() {
 	VBO VBO1(vertices, sizeof(vertices));
 	EBO EBO1(indices, sizeof(indices));
 
-	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, sizeof(GLfloat) * 6, (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, sizeof(GLfloat) * 6, (void*)(3 * sizeof(GL_FLOAT)));
+	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, sizeof(GLfloat) * 8, (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, sizeof(GLfloat) * 8, (void*)(3 * sizeof(GL_FLOAT)));
+	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, sizeof(GLfloat) * 8, (void*)(6 * sizeof(GL_FLOAT)));
 
 	VAO1.UnBind();
 	VBO1.UnBind();
@@ -115,6 +116,10 @@ int main() {
 		std::chrono::system_clock::now().time_since_epoch()
 	).count();
 
+	// Texture
+
+	Texture tex_grassBlock("grassBlock.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+	tex_grassBlock.TexUnit(shaderProgram, "tex0", 0);
 
 	// Main loop to keep the window open
 	while (!glfwWindowShouldClose(window))
@@ -125,11 +130,13 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		shaderProgram.Activate();
+
+		glBindTexture(GL_TEXTURE_2D, tex_grassBlock.ID);
 		moveOffset();
 		glUniform3f(uniID, offset.x, offset.y, offset.z);
 		VAO1.Bind();
 
-		glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
 		// Swap the buffers to display the window
 		glfwSwapBuffers(window);
@@ -144,6 +151,7 @@ int main() {
 	VBO1.Delete();
 	EBO1.Delete();
 	shaderProgram.Delete();
+	tex_grassBlock.Delete();
 	glfwDestroyWindow(window); // Destroy the window
 	glfwTerminate(); // Terminate GLFW
 	return 0; 
