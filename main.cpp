@@ -9,6 +9,8 @@
 #include "shader.h"
 #include "texture.h"
 #include "VAO.h"
+#include "Camera.h"
+#include "WorldTimeHandler.h"
 
 GLfloat vertices[] =
 {
@@ -55,32 +57,7 @@ bool moveDir = true;
 long long last;
 float moveSpeed = 0.001f;
 
-constexpr int width = 800, height = 800;
-
-void moveOffset()
-{
-	auto now = std::chrono::system_clock::now();
-
-	// Get duration since epoch in milliseconds
-	long long nowms = std::chrono::duration_cast<std::chrono::milliseconds>(
-		now.time_since_epoch()
-	).count();
-
-	GLfloat newVal;
-
-	if (moveDir)
-	{
-		newVal = std::min(.5f, offset.x + ((float)(nowms - last)) * moveSpeed);
-	}
-	else
-	{
-		newVal = std::max(-.5f, offset.x - ((float)(nowms - last)) * moveSpeed);
-	}
-
-	if (newVal == 0.5f || newVal == -0.5f)moveDir = !moveDir;
-	offset.x = newVal;
-	last = nowms;
-}
+constexpr int width = 1600, height = 900;
 
 int main() {
 	// Initialize GLFW
@@ -128,52 +105,32 @@ int main() {
 	VBO1.UnBind();
 	EBO1.UnBind();
 
-	GLuint uniID = glGetUniformLocation(shaderProgram.ID, "offset");
-
-	std::chrono::time_point<std::chrono::system_clock> now = std::chrono::system_clock::now();
-
-	last = std::chrono::duration_cast<std::chrono::milliseconds>(
-		std::chrono::system_clock::now().time_since_epoch()
-	).count();
-
 	// Texture
-
 	Texture tex_grassBlock("Grass.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	tex_grassBlock.TexUnit(shaderProgram, "tex0", 0);
 
+	// Enables the depth buffer
 	glEnable(GL_DEPTH_TEST);
 
+	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+
+	WTH::UpdateTime();
 	// Main loop to keep the window open
 	while (!glfwWindowShouldClose(window))
 	{	
+		WTH::UpdateTime();
 		// Set the clear color to a dark blue shade
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-		// Clear the collor buffer
+		// Clear the collor and the depth buffers
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+		camera.Inputs(window, WTH::DeltaTimeSec());
+			
 		shaderProgram.Activate();
 
-		// Matrices
-		glm::mat4 model = glm::mat4(1.0f);	
-		glm::mat4 view = glm::mat4(1.0f);	
-		glm::mat4 proj = glm::mat4(1.0f);	
-
-		model = glm::rotate(model, glm::radians(-54.4f), glm::vec3(0.75f,1.0f,0.0f));						// Rotating the model
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -5.0f));											// Moving the view back a little bit
-		proj = glm::perspective(glm::radians(45.0f), static_cast<float>(width / height), 0.1f, 1000.0f);	// To project on the screen
-
-		// Passing all the uniforms to the shader program
-		GLuint modelLoc = glGetUniformLocation(shaderProgram.ID, "model");
-		GLuint viewLoc = glGetUniformLocation(shaderProgram.ID, "view");
-		GLuint projLoc = glGetUniformLocation(shaderProgram.ID, "proj");
-
-		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
-		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
-		glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(proj));
+		camera.Matrix(45.0f, 0.1f, 500.0f, shaderProgram, "camMat");
 
 		glBindTexture(GL_TEXTURE_2D, tex_grassBlock.ID);
-		moveOffset();
-		glUniform3f(uniID, offset.x, offset.y, offset.z);
 		VAO1.Bind();
 
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLuint), GL_UNSIGNED_INT, 0);
