@@ -27,7 +27,7 @@ Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, 
 
 
 // Selects a shader uniform sampler to use a specified texture unit
-void Texture::TexUnit(Shader shader, const char* uniform, GLuint unit)
+void Texture::TexUnit(Shader& shader, const char* uniform, GLuint unit)
 {
 	GLuint texUniform = glGetUniformLocation(shader.ID, uniform);		// Gets the location of the sampler	
 	shader.Activate();													// Activates the shader program

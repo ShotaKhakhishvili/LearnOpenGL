@@ -9,9 +9,13 @@ out vec2 texCoord;
 
 uniform vec3 offset;
 
+uniform mat4 model;
+uniform mat4 view;
+uniform mat4 proj;
+
 void main()
 {
-	gl_Position = vec4(aPos.x + offset.x, aPos.y + offset.y, aPos.z + offset.z, 1.0f);
+	gl_Position = proj * view * model * vec4(aPos.x + offset.x, aPos.y + offset.y, aPos.z + offset.z, 1.0f);
 	texCoord = aTex;
 	color = aColor;
 };
