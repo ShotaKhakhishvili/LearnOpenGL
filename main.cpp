@@ -14,50 +14,86 @@
 
 GLfloat vertices[] =
 {
-	//---------------------COORDS---------------------//	//---COLORS----//	  //--Tex Coords--//
-	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.024f,	0.353f,			// Lower Left
-	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.262f,	0.353f,			// Upper left 
-	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.262f,	0.647f,			// Upper right
-	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.024f,	0.647f,			// Lower right 
-
-	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.024f,	0.353f,			// Lower Left
-	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.262f,	0.353f,			// Upper left 
-	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.262f,	0.647f,			// Upper right
-	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.024f,	0.647f,			// Lower right 
+	//---------------------COORDS----------------------//	//-Vert Colors-//		//---------Tex Coords--------//		//-----Normals-----//
+	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Left Front
+	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Right Front 
+	-0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Left Back
+	 0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Right Back
+																														 			 	 
+	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Left Front
+	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Right Front
+	-0.5f,			 0.5f,	   -1.0f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Left Back
+	 0.5f,			 0.5f ,	   -1.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Right Back
+																														 
+	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Left Front
+	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Left Front
+	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Right Front
+	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Right Front
+																														 
+	-0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Left Back
+	-0.5f,			 0.5f,	   -1.0f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Left Back
+	 0.5f,			 0.5f ,	   -1.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Right Back
+	 0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Right Back
+																														 			  
+	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Upper Right Front 
+	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Lower Right Front
+	 0.5f,			 0.5f ,	   -1.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Upper Right Back
+	 0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Lower Right Back
+																																  
+	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Front
+	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Front
+	-0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Back
+	-0.5f,			 0.5f,	   -1.0f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Back
 };
 
-GLuint indices[] = {
-	0, 2, 1,
-	0, 3, 2,
-	4, 6, 5,
-	4, 7, 6,
-	0, 5, 4,
-	0, 1, 5,
-	2, 5, 1,
-	2, 6, 5,
-	2, 7, 6,
-	2, 3, 7,
-	0, 4, 7,
-	0, 7, 3
-};
-
-template<typename T>
-struct vec3
+GLuint indices[] =
 {
-	T x, y, z;
-	vec3()
-	{}
-	vec3(T xin, T yin, T zin)
-		: x(xin), y(yin), z(zin)
-	{}
+	0, 1, 2,
+	3, 1, 2,
+	4, 5, 6,
+	7, 5, 6,
+	8, 9, 10,
+	8, 10, 11,
+	12, 13, 14,
+	12, 14, 15,
+	16, 17, 18,
+	19, 17, 18,
+	20, 21, 22,
+	23, 21, 22
 };
 
-vec3<GLfloat> offset = vec3<GLfloat>(0.0f, 0.0f, 0.0f);
-bool moveDir = true;
-long long last;
-float moveSpeed = 0.001f;
+GLfloat lightVertices[] =
+{ //     COORDINATES     //
+	-0.1f, -0.1f,  0.1f,
+	-0.1f, -0.1f, -0.1f,
+	 0.1f, -0.1f, -0.1f,
+	 0.1f, -0.1f,  0.1f,
+	-0.1f,  0.1f,  0.1f,
+	-0.1f,  0.1f, -0.1f,
+	 0.1f,  0.1f, -0.1f,
+	 0.1f,  0.1f,  0.1f
+};
+
+GLuint lightIndices[] =
+{
+	0, 1, 2,
+	0, 2, 3,
+	0, 4, 7,
+	0, 7, 3,
+	3, 7, 6,
+	3, 6, 2,
+	2, 6, 5,
+	2, 5, 1,
+	1, 5, 4,
+	1, 4, 0,
+	4, 5, 6,
+	4, 6, 7
+};
 
 constexpr int width = 1600, height = 900;
+glm::vec4 lightCol = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+glm::vec3 lightPos = glm::vec3(0.0f, 2.0f, 0.0f);
+glm::vec3 grassPos = glm::vec3(0.0f, -1.0f, 0.0f);
 
 int main() {
 	// Initialize GLFW
@@ -87,9 +123,12 @@ int main() {
 	gladLoadGL();
 
 	Shader shaderProgram = Shader("default.vert", "default.frag");
+	Shader lightShader = Shader("light.vert", "light.frag");
 
 	// Set the viewport size and clear color
 	glViewport(0, 0, width, height);
+
+	// Grass
 
 	VAO VAO1;
 	VAO1.Bind();
@@ -97,17 +136,50 @@ int main() {
 	VBO VBO1(vertices, sizeof(vertices));
 	EBO EBO1(indices, sizeof(indices));
 
-	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, sizeof(GLfloat) * 8, (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, sizeof(GLfloat) * 8, (void*)(3 * sizeof(GL_FLOAT)));
-	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, sizeof(GLfloat) * 8, (void*)(6 * sizeof(GL_FLOAT)));
+	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, sizeof(GLfloat) * 11, (void*)0);
+	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, sizeof(GLfloat) * 11, (void*)(3 * sizeof(GL_FLOAT)));
+	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, sizeof(GLfloat) * 11, (void*)(6 * sizeof(GL_FLOAT)));
+	VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, sizeof(GLfloat) * 11, (void*)(8 * sizeof(GL_FLOAT)));
 
 	VAO1.UnBind();
 	VBO1.UnBind();
 	EBO1.UnBind();
 
+	glm::mat4 grassModel = glm::mat4(1.0f);
+	grassModel = glm::translate(grassModel, grassPos);
+
 	// Texture
 	Texture tex_grassBlock("Grass.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
 	tex_grassBlock.TexUnit(shaderProgram, "tex0", 0);
+
+	shaderProgram.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(grassModel));
+	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightCol.x, lightCol.y, lightCol.z, lightCol.a);
+	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
+
+	// Grass End
+
+	// Light Cube
+
+	VAO VAO2;
+	VAO2.Bind();
+
+	VBO VBO2(lightVertices, sizeof(lightVertices));
+	EBO EBO2(lightIndices, sizeof(lightIndices));
+
+	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, sizeof(GLfloat) * 3, (void*)0);
+
+	VAO2.UnBind();
+	VBO2.UnBind();
+	EBO2.UnBind();
+
+	glm::mat4 lightModel = glm::mat4(1.0f);
+	lightModel = glm::translate(lightModel, lightPos);
+
+	lightShader.Activate();
+	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
+	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightCol.x, lightCol.y, lightCol.z, lightCol.a);
+	// Light Cube End
 
 	// Enables the depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -121,19 +193,26 @@ int main() {
 		WTH::UpdateTime();
 		// Set the clear color to a dark blue shade
 		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
-		// Clear the collor and the depth buffers
+		// Clear the color and the depth buffers
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		camera.Inputs(window, WTH::DeltaTimeSec());
-			
-		shaderProgram.Activate();
+		camera.UpdateMatrix(45.0f, 0.1f, 500.0f);
 
-		camera.Matrix(45.0f, 0.1f, 500.0f, shaderProgram, "camMat");
+		shaderProgram.Activate();
+		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+		camera.Matrix(shaderProgram, "camMat");
 
 		glBindTexture(GL_TEXTURE_2D, tex_grassBlock.ID);
+		tex_grassBlock.Bind();
 		VAO1.Bind();
 
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLuint), GL_UNSIGNED_INT, 0);
+
+		lightShader.Activate();
+		camera.Matrix(lightShader, "camMat");
+		VAO2.Bind();
+		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(GLuint), GL_UNSIGNED_INT, 0);
 
 		// Swap the buffers to display the window
 		glfwSwapBuffers(window);
