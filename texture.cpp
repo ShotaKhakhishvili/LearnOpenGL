@@ -9,7 +9,8 @@ Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, 
 	unsigned char* bytes = stbi_load(image, &width, &height, &numColCh, 0);				// Reading the texture image
 
 	glGenTextures(1, &ID);																// Creating a texture on the GPU
-	glActiveTexture(slot);																// Activating the specified texture unit
+	glActiveTexture(GL_TEXTURE0 + slot);												// Activating the specified texture unit
+	unit = slot;
 	glBindTexture(type, ID);															// Binding the given texture
 		
 	glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST);							// Scaling type when scaled down
@@ -27,7 +28,7 @@ Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, 
 
 
 // Selects a shader uniform sampler to use a specified texture unit
-void Texture::TexUnit(Shader& shader, const char* uniform, GLuint unit)
+void Texture::TexUnit(Shader& shader, const char* uniform)
 {
 	GLuint texUniform = glGetUniformLocation(shader.ID, uniform);		// Gets the location of the sampler	
 	shader.Activate();													// Activates the shader program
@@ -36,6 +37,7 @@ void Texture::TexUnit(Shader& shader, const char* uniform, GLuint unit)
 
 void Texture::Bind()
 {
+	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(type, ID);
 }
 

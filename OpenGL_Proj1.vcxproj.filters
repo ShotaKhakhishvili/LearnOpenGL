@@ -90,5 +90,14 @@
     <Image Include="GrassBlock.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+    <Image Include="Planks_BaseColor.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Planks_Roughness.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
+    <Image Include="Grass.png">
+      <Filter>Resource Files\Textures</Filter>
+    </Image>
   </ItemGroup>
 </Project>

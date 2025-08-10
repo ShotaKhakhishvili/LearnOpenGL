@@ -15,36 +15,37 @@
 GLfloat vertices[] =
 {
 	//---------------------COORDS----------------------//	//-Vert Colors-//		//---------Tex Coords--------//		//-----Normals-----//
-	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Left Front
-	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Right Front 
-	-0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Left Back
-	 0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Right Back
-																														 			 	 
-	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Left Front
-	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Right Front
-	-0.5f,			 0.5f,	   -1.0f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Left Back
-	 0.5f,			 0.5f ,	   -1.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Right Back
-																														 
-	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Left Front
-	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Left Front
-	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Right Front
-	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Right Front
-																														 
-	-0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Left Back
-	-0.5f,			 0.5f,	   -1.0f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Left Back
-	 0.5f,			 0.5f ,	   -1.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Right Back
-	 0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Right Back
-																														 			  
-	 0.5f,			 0.5f ,		0.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Upper Right Front 
-	 0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Lower Right Front
-	 0.5f,			 0.5f ,	   -1.0f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Upper Right Back
-	 0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Lower Right Back
-																																  
-	-0.5f,			-0.5f,		0.0f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Front
-	-0.5f,			 0.5f,		0.0f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Front
-	-0.5f,			-0.5f,	   -1.0f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Back
-	-0.5f,			 0.5f,	   -1.0f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Back
+	-0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Left Front
+	 0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Right Front 
+	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Left Back
+	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Right Back
+
+	-0.5f,			 0.5f,		0.5f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Left Front
+	 0.5f,			 0.5f ,		0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Right Front
+	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Left Back
+	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Right Back
+								
+	-0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Left Front
+	-0.5f,			 0.5f,		0.5f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Left Front
+	 0.5f,			 0.5f ,		0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Right Front
+	 0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Right Front
+								
+	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Left Back
+	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Left Back
+	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Right Back
+	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Right Back
+								
+	 0.5f,			 0.5f ,		0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Upper Right Front 
+	 0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Lower Right Front
+	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Upper Right Back
+	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Lower Right Back
+								
+	-0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Front
+	-0.5f,			 0.5f,		0.5f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Front
+	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Back
+	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Back
 };
+
 
 GLuint indices[] =
 {
@@ -92,8 +93,8 @@ GLuint lightIndices[] =
 
 constexpr int width = 1600, height = 900;
 glm::vec4 lightCol = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-glm::vec3 lightPos = glm::vec3(0.0f, 2.0f, 0.0f);
-glm::vec3 grassPos = glm::vec3(0.0f, -1.0f, 0.0f);
+glm::vec3 lightPos = glm::vec3(0.0f, 1.2f, 0.0f);
+glm::vec3 grassPos = glm::vec3(0.0f, 0.0f, 0.0f);
 
 int main() {
 	// Initialize GLFW
@@ -149,8 +150,10 @@ int main() {
 	grassModel = glm::translate(grassModel, grassPos);
 
 	// Texture
-	Texture tex_grassBlock("Grass.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-	tex_grassBlock.TexUnit(shaderProgram, "tex0", 0);
+	Texture tex_col("Grass.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
+	tex_col.TexUnit(shaderProgram, "tex0");
+	Texture tex_rough("Planks_Roughness.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
+	tex_rough.TexUnit(shaderProgram, "tex1");
 
 	shaderProgram.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(grassModel));
@@ -197,14 +200,14 @@ int main() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		camera.Inputs(window, WTH::DeltaTimeSec());
-		camera.UpdateMatrix(45.0f, 0.1f, 500.0f);
+		camera.UpdateMatrix(45.0f, 0.01f, 500.0f);
 
 		shaderProgram.Activate();
 		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
 		camera.Matrix(shaderProgram, "camMat");
 
-		glBindTexture(GL_TEXTURE_2D, tex_grassBlock.ID);
-		tex_grassBlock.Bind();
+		tex_col.Bind();
+		tex_rough.Bind();
 		VAO1.Bind();
 
 		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLuint), GL_UNSIGNED_INT, 0);
@@ -226,8 +229,12 @@ int main() {
 	VAO1.Delete();
 	VBO1.Delete();
 	EBO1.Delete();
+	VAO2.Delete();
+	VBO2.Delete();
+	EBO2.Delete();
 	shaderProgram.Delete();
-	tex_grassBlock.Delete();
+	lightShader.Delete();
+	tex_col.Delete();
 	glfwDestroyWindow(window); // Destroy the window
 	glfwTerminate(); // Terminate GLFW
 	return 0; 

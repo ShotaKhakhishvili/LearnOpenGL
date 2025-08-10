@@ -163,7 +163,10 @@
     <ClInclude Include="WorldTimeHandler.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Grass.png" />
     <Image Include="GrassBlock.png" />
+    <Image Include="Planks_BaseColor.png" />
+    <Image Include="Planks_Roughness.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
