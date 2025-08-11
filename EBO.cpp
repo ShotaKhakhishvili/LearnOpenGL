@@ -1,10 +1,10 @@
 #include "EBO.h"
 
-EBO::EBO(GLuint* indices, GLsizeiptr size)
+EBO::EBO(std::vector<GLuint>& indices)
 {
-	glGenBuffers(1, &ID);														// Creating a buffer on the GPU
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);									// Binding the buffer as a type GL_ELEMENT_ARRAY_BUFFER
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, indices, GL_STATIC_DRAW);		// Attaching the data to the buffer
+	glGenBuffers(1, &ID);																						// Creating a buffer on the GPU
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);																	// Binding the buffer as a type GL_ELEMENT_ARRAY_BUFFER
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), indices.data(), GL_STATIC_DRAW);		// Attaching the data to the buffer
 }
 
 void EBO::Bind()

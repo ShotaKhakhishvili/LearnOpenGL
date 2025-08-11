@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, GLenum pixelType)
+Texture::Texture(const char* image, const char* texType, GLuint slot, GLenum format, GLenum pixelType)
 {
 	type = texType;
 
@@ -11,24 +11,24 @@ Texture::Texture(const char* image, GLenum texType, GLuint slot, GLenum format, 
 	glGenTextures(1, &ID);																// Creating a texture on the GPU
 	glActiveTexture(GL_TEXTURE0 + slot);												// Activating the specified texture unit
 	unit = slot;
-	glBindTexture(type, ID);															// Binding the given texture
+	glBindTexture(GL_TEXTURE_2D, ID);															// Binding the given texture
 		
-	glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST);							// Scaling type when scaled down
-	glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_NEAREST);							// Scaling type when scaled up
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);							// Scaling type when scaled down
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);							// Scaling type when scaled up
 
-	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_REPEAT);								// Wrapping mode on axis S (horizontal)
-	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_REPEAT);								// Wrapping mode on axis T (vertical)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);								// Wrapping mode on axis S (horizontal)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);								// Wrapping mode on axis T (vertical)
 
-	glTexImage2D(type, 0, GL_RGBA, width, height, 0, format, pixelType, bytes);			// Specify the 2D texture image and upload pixel data to the GPU
-	glGenerateMipmap(type);																// Generating mipmaps
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, pixelType, bytes);			// Specify the 2D texture image and upload pixel data to the GPU
+	glGenerateMipmap(GL_TEXTURE_2D);																// Generating mipmaps
 
 	stbi_image_free(bytes);																// Deallocating the image data, since its no longer used
-	glBindTexture(type, 0);																// Unbinding to avoid accidental changes
+	glBindTexture(GL_TEXTURE_2D, 0);																// Unbinding to avoid accidental changes
 }
 
 
 // Selects a shader uniform sampler to use a specified texture unit
-void Texture::TexUnit(Shader& shader, const char* uniform)
+void Texture::TexUnit(Shader& shader, const char* uniform, unsigned int unit)
 {
 	GLuint texUniform = glGetUniformLocation(shader.ID, uniform);		// Gets the location of the sampler	
 	shader.Activate();													// Activates the shader program
@@ -38,12 +38,12 @@ void Texture::TexUnit(Shader& shader, const char* uniform)
 void Texture::Bind()
 {
 	glActiveTexture(GL_TEXTURE0 + unit);
-	glBindTexture(type, ID);
+	glBindTexture(GL_TEXTURE_2D, ID);
 }
 
 void Texture::UnBind()
 {
-	glBindTexture(type, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
 void Texture::Delete()

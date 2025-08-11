@@ -6,46 +6,43 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <chrono>
-#include "shader.h"
-#include "texture.h"
-#include "VAO.h"
-#include "Camera.h"
+
+#include "Mesh.h"
 #include "WorldTimeHandler.h"
 
-GLfloat vertices[] =
+Vertex vertices[] =
 {
-	//---------------------COORDS----------------------//	//-Vert Colors-//		//---------Tex Coords--------//		//-----Normals-----//
-	-0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Left Front
-	 0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.346f,		 0.0f, -1.0f,  0.0f,	// Lower Right Front 
-	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.9761904761904762f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Left Back
-	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 0.0f, -1.0f,  0.0f,	// Lower Right Back
+	//----------------COORDS----------------//		//---------Normals----------//		//-----Vertex Colors-----//	 //-------------Texture UVs-----------//
+	Vertex{glm::vec3(-0.5f,	-0.5f,		0.5f),		glm::vec3( 0.0f, -1.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.9761904761904762f,	0.346f)},	// Lower Left Front
+	Vertex{glm::vec3( 0.5f,	-0.5f,		0.5f),		glm::vec3( 0.0f, -1.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(0.7380952380952381f,	0.346f)},	// Lower Right Front 
+	Vertex{glm::vec3(-0.5f,	-0.5f,	   -0.5f),		glm::vec3( 0.0f, -1.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.9761904761904762f,	0.639f)},	// Lower Left Back
+	Vertex{glm::vec3( 0.5f,	-0.5f,	   -0.5f),		glm::vec3( 0.0f, -1.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(0.7380952380952381f,	0.639f)},	// Lower Right Back
 
-	-0.5f,			 0.5f,		0.5f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Left Front
-	 0.5f,			 0.5f ,		0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  1.0f,  0.0f,	// Upper Right Front
-	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Left Back
-	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  1.0f,  0.0f,	// Upper Right Back
-								
-	-0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Left Front
-	-0.5f,			 0.5f,		0.5f,						1.0f, 1.0f, 0.0f,		0.2619047619047619f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Left Front
-	 0.5f,			 0.5f ,		0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.346f,		 0.0f,  0.0f,  1.0f,	// Upper Right Front
-	 0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.045f,		 0.0f,  0.0f,  1.0f,	// Lower Right Front
-								
-	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Left Back
-	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Left Back
-	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 0.0f,  0.0f, -1.0f,	// Upper Right Back
-	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.4950000000000000f,	0.938f,		 0.0f,  0.0f, -1.0f,	// Lower Right Back
-								
-	 0.5f,			 0.5f ,		0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Upper Right Front 
-	 0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.3453f,	 1.0f,  0.0f,  0.0f,	// Lower Right Front
-	 0.5f,			 0.5f ,	   -0.5f,						1.0f, 0.0f, 1.0f,		0.4950000000000000f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Upper Right Back
-	 0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 1.0f,		0.7380952380952381f,	0.639f,		 1.0f,  0.0f,  0.0f,	// Lower Right Back
-								
-	-0.5f,			-0.5f,		0.5f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Front
-	-0.5f,			 0.5f,		0.5f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.346f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Front
-	-0.5f,			-0.5f,	   -0.5f,						0.0f, 1.0f, 0.0f,		0.0240000000000000f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Lower Left Back
-	-0.5f,			 0.5f,	   -0.5f,						1.0f, 1.0f, 0.0f,		0.2639047619047619f,	0.639f,	    -1.0f,  0.0f,  0.0f,	// Upper Left Back
+	Vertex{glm::vec3(-0.5f,	 0.5f,		0.5f),		glm::vec3( 0.0f,  1.0f,  0.0f),		glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.2619047619047619f,	0.346f)},	// Upper Left Front
+	Vertex{glm::vec3( 0.5f,	 0.5f,		0.5f),		glm::vec3( 0.0f,  1.0f,  0.0f),		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.346f)},	// Upper Right Front
+	Vertex{glm::vec3(-0.5f,	 0.5f,	   -0.5f),		glm::vec3( 0.0f,  1.0f,  0.0f),		glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.2619047619047619f,	0.639f)},	// Upper Left Back
+	Vertex{glm::vec3( 0.5f,	 0.5f,	   -0.5f),		glm::vec3( 0.0f,  1.0f,  0.0f),		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.639f)},	// Upper Right Back
+	
+	Vertex{glm::vec3(-0.5f,	-0.5f,		0.5f),		glm::vec3( 0.0f,  0.0f,  1.0f),		glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.2619047619047619f,	0.045f)},	// Lower Left Front
+	Vertex{glm::vec3(-0.5f,	 0.5f,		0.5f),		glm::vec3( 0.0f,  0.0f,  1.0f),		glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.2619047619047619f,	0.346f)},	// Upper Left Front
+	Vertex{glm::vec3( 0.5f,	 0.5f,		0.5f),		glm::vec3( 0.0f,  0.0f,  1.0f),		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.346f)},	// Upper Right Front
+	Vertex{glm::vec3( 0.5f,	-0.5f,		0.5f),		glm::vec3( 0.0f,  0.0f,  1.0f),		glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.045f)},	// Lower Right Front
+
+	Vertex{glm::vec3(-0.5f,	-0.5f,	   -0.5f),		glm::vec3( 0.0f,  0.0f, -1.0f),		glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.2639047619047619f,	0.938f)},	// Lower Left Back
+	Vertex{glm::vec3(-0.5f,	 0.5f,	   -0.5f),		glm::vec3( 0.0f,  0.0f, -1.0f),		glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.2639047619047619f,	0.639f)},	// Upper Left Back
+	Vertex{glm::vec3( 0.5f,	 0.5f,	   -0.5f),		glm::vec3( 0.0f,  0.0f, -1.0f),		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.639f)},	// Upper Right Back
+	Vertex{glm::vec3( 0.5f,	-0.5f,	   -0.5f),		glm::vec3( 0.0f,  0.0f, -1.0f),		glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.938f)},	// Lower Right Back
+	
+	Vertex{glm::vec3( 0.5f,	 0.5f,		0.5f),		glm::vec3( 1.0f,  0.0f,  0.0f),		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.3453)},	// Upper Right Front 
+	Vertex{glm::vec3( 0.5f,	-0.5f,		0.5f),		glm::vec3( 1.0f,  0.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(0.7380952380952381f,	0.3453)},	// Lower Right Front
+	Vertex{glm::vec3( 0.5f,	 0.5f,	   -0.5f),		glm::vec3( 1.0f,  0.0f,  0.0f),		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(0.4950000000000000f,	0.639f)},	// Upper Right Back
+	Vertex{glm::vec3( 0.5f,	-0.5f,	   -0.5f),		glm::vec3( 1.0f,  0.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 1.0f), glm::vec2(0.7380952380952381f,	0.639f)},	// Lower Right Back
+
+	Vertex{glm::vec3(-0.5f,	-0.5f,		0.5f),		glm::vec3(-1.0f,  0.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0240000000000000f,	0.346f)},	// Lower Left Front
+	Vertex{glm::vec3(-0.5f,	 0.5f,		0.5f),		glm::vec3(-1.0f,  0.0f,  0.0f),		glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.2639047619047619f,	0.346f)},	// Upper Left Front
+	Vertex{glm::vec3(-0.5f,	-0.5f,	   -0.5f),		glm::vec3(-1.0f,  0.0f,  0.0f),		glm::vec3(0.0f, 1.0f, 0.0f), glm::vec2(0.0240000000000000f,	0.639f)},	// Lower Left Back
+	Vertex{glm::vec3(-0.5f,	 0.5f,	   -0.5f),		glm::vec3(-1.0f,  0.0f,  0.0f),		glm::vec3(1.0f, 1.0f, 0.0f), glm::vec2(0.2639047619047619f,	0.639f)}	// Upper Left Back
 };
-
 
 GLuint indices[] =
 {
@@ -63,19 +60,19 @@ GLuint indices[] =
 	23, 21, 22
 };
 
-GLfloat lightVertices[] =
+Vertex vertices1[] =
 { //     COORDINATES     //
-	-0.1f, -0.1f,  0.1f,
-	-0.1f, -0.1f, -0.1f,
-	 0.1f, -0.1f, -0.1f,
-	 0.1f, -0.1f,  0.1f,
-	-0.1f,  0.1f,  0.1f,
-	-0.1f,  0.1f, -0.1f,
-	 0.1f,  0.1f, -0.1f,
-	 0.1f,  0.1f,  0.1f
+	Vertex{glm::vec3(-0.1f, -0.1f,  0.1f)},
+	Vertex{glm::vec3(-0.1f, -0.1f, -0.1f)},
+	Vertex{glm::vec3( 0.1f, -0.1f, -0.1f)},
+	Vertex{glm::vec3( 0.1f, -0.1f,  0.1f)},
+	Vertex{glm::vec3(-0.1f,  0.1f,  0.1f)},
+	Vertex{glm::vec3(-0.1f,  0.1f, -0.1f)},
+	Vertex{glm::vec3( 0.1f,  0.1f, -0.1f)},
+	Vertex{glm::vec3(0.1f,  0.1f,  0.1f)}
 };
 
-GLuint lightIndices[] =
+GLuint indices1[] =
 {
 	0, 1, 2,
 	0, 2, 3,
@@ -129,60 +126,37 @@ int main() {
 	// Set the viewport size and clear color
 	glViewport(0, 0, width, height);
 
-	// Grass
+	// Meshes
 
-	VAO VAO1;
-	VAO1.Bind();
+	Texture textures[]
+	{
+		Texture ("Grass.png", "diffuse", 0, GL_RGBA, GL_UNSIGNED_BYTE),
+		Texture ("Planks_Roughness.png", "specular", 1, GL_RED, GL_UNSIGNED_BYTE)
+	};
 
-	VBO VBO1(vertices, sizeof(vertices));
-	EBO EBO1(indices, sizeof(indices));
+	std::vector<Vertex> grassVertices(vertices, vertices + sizeof(vertices) / sizeof(Vertex));
+	std::vector<GLuint> grassIndices(indices, indices + sizeof(indices) / sizeof(GLuint));
+	std::vector<Texture> grassTextures(textures, textures + sizeof(textures) / sizeof(Texture));
+	Mesh grassMesh(grassVertices, grassIndices, grassTextures);
 
-	VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, sizeof(GLfloat) * 11, (void*)0);
-	VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, sizeof(GLfloat) * 11, (void*)(3 * sizeof(GL_FLOAT)));
-	VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, sizeof(GLfloat) * 11, (void*)(6 * sizeof(GL_FLOAT)));
-	VAO1.LinkAttrib(VBO1, 3, 3, GL_FLOAT, sizeof(GLfloat) * 11, (void*)(8 * sizeof(GL_FLOAT)));
+	std::vector<Vertex> lightVertices(vertices1, vertices1 + sizeof(vertices1) / sizeof(Vertex));
+	std::vector<GLuint> lightIndices(indices1, indices1 + sizeof(indices1) / sizeof(GLuint));
+	std::vector<Texture> lightTextures(textures, textures + sizeof(textures) / sizeof(Texture));
+	Mesh lightMesh(lightVertices, lightIndices, lightTextures);
 
-	VAO1.UnBind();
-	VBO1.UnBind();
-	EBO1.UnBind();
-
+	// End Meshes
 	glm::mat4 grassModel = glm::mat4(1.0f);
 	grassModel = glm::translate(grassModel, grassPos);
-
-	// Texture
-	Texture tex_col("Grass.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
-	tex_col.TexUnit(shaderProgram, "tex0");
-	Texture tex_rough("Planks_Roughness.png", GL_TEXTURE_2D, 1, GL_RED, GL_UNSIGNED_BYTE);
-	tex_rough.TexUnit(shaderProgram, "tex1");
+	glm::mat4 lightModel = glm::mat4(1.0f);
+	lightModel = glm::translate(lightModel, lightPos);
 
 	shaderProgram.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(shaderProgram.ID, "model"), 1, GL_FALSE, glm::value_ptr(grassModel));
 	glUniform4f(glGetUniformLocation(shaderProgram.ID, "lightColor"), lightCol.x, lightCol.y, lightCol.z, lightCol.a);
 	glUniform3f(glGetUniformLocation(shaderProgram.ID, "lightPos"), lightPos.x, lightPos.y, lightPos.z);
-
-	// Grass End
-
-	// Light Cube
-
-	VAO VAO2;
-	VAO2.Bind();
-
-	VBO VBO2(lightVertices, sizeof(lightVertices));
-	EBO EBO2(lightIndices, sizeof(lightIndices));
-
-	VAO2.LinkAttrib(VBO2, 0, 3, GL_FLOAT, sizeof(GLfloat) * 3, (void*)0);
-
-	VAO2.UnBind();
-	VBO2.UnBind();
-	EBO2.UnBind();
-
-	glm::mat4 lightModel = glm::mat4(1.0f);
-	lightModel = glm::translate(lightModel, lightPos);
-
 	lightShader.Activate();
 	glUniformMatrix4fv(glGetUniformLocation(lightShader.ID, "model"), 1, GL_FALSE, glm::value_ptr(lightModel));
 	glUniform4f(glGetUniformLocation(lightShader.ID, "lightColor"), lightCol.x, lightCol.y, lightCol.z, lightCol.a);
-	// Light Cube End
 
 	// Enables the depth buffer
 	glEnable(GL_DEPTH_TEST);
@@ -202,39 +176,19 @@ int main() {
 		camera.Inputs(window, WTH::DeltaTimeSec());
 		camera.UpdateMatrix(45.0f, 0.01f, 500.0f);
 
-		shaderProgram.Activate();
-		glUniform3f(glGetUniformLocation(shaderProgram.ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
-		camera.Matrix(shaderProgram, "camMat");
-
-		tex_col.Bind();
-		tex_rough.Bind();
-		VAO1.Bind();
-
-		glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLuint), GL_UNSIGNED_INT, 0);
-
-		lightShader.Activate();
-		camera.Matrix(lightShader, "camMat");
-		VAO2.Bind();
-		glDrawElements(GL_TRIANGLES, sizeof(lightIndices) / sizeof(GLuint), GL_UNSIGNED_INT, 0);
+		grassMesh.Draw(shaderProgram, camera);
+		lightMesh.Draw(lightShader, camera);
 
 		// Swap the buffers to display the window
 		glfwSwapBuffers(window);
-
 		// Poll for events (like keyboard input, mouse movement, etc.)
 		glfwPollEvents();
 	}
 
 	// Clean up and close the window
 
-	VAO1.Delete();
-	VBO1.Delete();
-	EBO1.Delete();
-	VAO2.Delete();
-	VBO2.Delete();
-	EBO2.Delete();
 	shaderProgram.Delete();
 	lightShader.Delete();
-	tex_col.Delete();
 	glfwDestroyWindow(window); // Destroy the window
 	glfwTerminate(); // Terminate GLFW
 	return 0; 
