@@ -157,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="EBO.h" />
+    <ClInclude Include="FuncLib.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
@@ -169,6 +170,9 @@
     <Image Include="GrassBlock.png" />
     <Image Include="Planks_BaseColor.png" />
     <Image Include="Planks_Roughness.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="object.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

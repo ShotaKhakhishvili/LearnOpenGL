@@ -19,6 +19,9 @@
     <Filter Include="Resource Files\Textures">
       <UniqueIdentifier>{edcf86d3-faa9-42a3-985f-ca94da62c748}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Models">
+      <UniqueIdentifier>{a8d2375c-dd53-4d74-9fc4-f09f8c1e04ee}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -91,6 +94,9 @@
     <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FuncLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="GrassBlock.png">
@@ -105,5 +111,10 @@
     <Image Include="Grass.png">
       <Filter>Resource Files\Textures</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="object.txt">
+      <Filter>Resource Files\Models</Filter>
+    </Text>
   </ItemGroup>
 </Project>
