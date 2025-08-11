@@ -4,12 +4,12 @@ Texture::Texture(const char* image, const char* texType, GLuint slot, GLenum for
 {
 	type = texType;
 
-	int width, height, numColCh;														// Self-explanatory
-	stbi_set_flip_vertically_on_load(true);												// Fixing the allignment error between stbi and openGL
-	unsigned char* bytes = stbi_load(image, &width, &height, &numColCh, 0);				// Reading the texture image
+	int width, height, numColCh;																// Self-explanatory
+	stbi_set_flip_vertically_on_load(true);														// Fixing the allignment error between stbi and openGL
+	unsigned char* bytes = stbi_load(image, &width, &height, &numColCh, 0);						// Reading the texture image
 
-	glGenTextures(1, &ID);																// Creating a texture on the GPU
-	glActiveTexture(GL_TEXTURE0 + slot);												// Activating the specified texture unit
+	glGenTextures(1, &ID);																		// Creating a texture on the GPU
+	glActiveTexture(GL_TEXTURE0 + slot);														// Activating the specified texture unit
 	unit = slot;
 	glBindTexture(GL_TEXTURE_2D, ID);															// Binding the given texture
 		
@@ -19,11 +19,11 @@ Texture::Texture(const char* image, const char* texType, GLuint slot, GLenum for
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);								// Wrapping mode on axis S (horizontal)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);								// Wrapping mode on axis T (vertical)
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, pixelType, bytes);			// Specify the 2D texture image and upload pixel data to the GPU
-	glGenerateMipmap(GL_TEXTURE_2D);																// Generating mipmaps
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, format, pixelType, bytes);		// Specify the 2D texture image and upload pixel data to the GPU
+	glGenerateMipmap(GL_TEXTURE_2D);															// Generating mipmaps
 
-	stbi_image_free(bytes);																// Deallocating the image data, since its no longer used
-	glBindTexture(GL_TEXTURE_2D, 0);																// Unbinding to avoid accidental changes
+	stbi_image_free(bytes);																		// Deallocating the image data, since its no longer used
+	glBindTexture(GL_TEXTURE_2D, 0);															// Unbinding to avoid accidental changes
 }
 
 

@@ -4,6 +4,15 @@
 #include <stb/stb_image.h>
 #include "shader.h"
 
+struct TextureParameters
+{
+	const char* image;
+	const char* texType;
+	GLuint slot;
+	GLenum format;
+	GLenum pixelType;
+};
+
 class Texture
 {
 public:

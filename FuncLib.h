@@ -125,7 +125,7 @@ inline void ReadFromObjIntoVectors(const std::string& filename, std::vector<Vert
                 auto it = vertexMap.find(key);
                 if (it == vertexMap.end()) {
                     Vertex vert{};
-                    vert.coord = tmp_pos[pIdx];
+                    vert.coord = tmp_pos[pIdx] / 10.0f;
                     if (uvIdx != -1) vert.texUV = tmp_uv[uvIdx];
                     if (nIdx != -1) vert.normal = tmp_norm[nIdx];
 
