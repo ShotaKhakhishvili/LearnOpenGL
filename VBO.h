@@ -18,8 +18,8 @@ public:
 	GLuint ID;
 	VBO(std::vector<Vertex>& vertices);
 
-	void Bind();
-	void UnBind();
-	void Delete();
+	void Bind()const;
+	void UnBind()const;
+	void Delete()const;
 };
 

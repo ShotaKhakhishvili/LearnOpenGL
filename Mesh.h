@@ -5,17 +5,19 @@
 #include "Texture.h"
 #include "Camera.h"
 
+struct MeshParameters
+{
+	std::string meshName;
+};
+
 class Mesh
 {
 public:
 	std::vector<Vertex> vertices;
 	std::vector<GLuint> indices;
-	std::vector<std::shared_ptr<Texture>> textures;
 
 	VAO VAO;
 
-	Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices, std::vector<std::shared_ptr<Texture>>& textures);
-
-	void Draw(Shader& shader, Camera& camera, glm::mat4& modelMat);
+	Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices);
 };
 

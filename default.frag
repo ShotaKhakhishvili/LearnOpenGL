@@ -9,11 +9,9 @@ in vec2 texCoord;
 uniform sampler2D diffuse0;
 uniform sampler2D specular0;
 
-uniform vec4 lightColor;
-uniform vec3 lightPos;
+uniform vec4 lightColor = vec4(1.0f, 1.0f, 1.0f, 1.0f);
+uniform vec3 lightPos = vec3(2.0f, 0.0f, 0.0f);
 uniform vec3 camPos;
-
-uniform float lightUse;
 
 vec4 pointLight(float a, float b)
 {
@@ -81,8 +79,5 @@ vec4 spotLight(float outerCone, float innerCone, vec3 dir)
 
 void main()
 {
-	if(lightUse == 0)
-		FragColor = spotLight(0.9f, 0.95f, vec3(0.0f, -1.0f, 0.0f));
-	else
-		FragColor = pointLight(1.1f, 0.05f);
+	FragColor = pointLight(1.1f, 0.05f);
 };

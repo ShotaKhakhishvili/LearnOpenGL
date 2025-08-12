@@ -10,7 +10,6 @@ out vec3 normal;
 out vec3 color;
 out vec2 texCoord;
 
-
 uniform mat4 camMat;
 uniform mat4 model;
 

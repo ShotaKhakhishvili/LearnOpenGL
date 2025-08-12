@@ -138,10 +138,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Data.cpp" />
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
+    <ClCompile Include="InstancedObject.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="Model.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb.cpp" />
@@ -157,9 +160,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Data.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="FuncLib.h" />
+    <ClInclude Include="InstancedObject.h" />
+    <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
@@ -172,11 +179,13 @@
     <Image Include="GrassBlock.png" />
     <Image Include="Planks_BaseColor.png" />
     <Image Include="Planks_Roughness.png" />
+    <Image Include="Sword_BaseColor.png" />
+    <Image Include="Sword_Roughness.png" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Cube.txt" />
     <Text Include="Grass.txt" />
-    <Text Include="object.txt" />
+    <Text Include="Object.txt" />
     <Text Include="Sword.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

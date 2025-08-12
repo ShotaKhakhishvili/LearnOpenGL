@@ -17,10 +17,10 @@ std::string get_file_contents(const char* filename)
 	return std::string();
 }
 
-Shader::Shader(const char* vertexPath, const char* fragmentPath)
+Shader::Shader(const std::string& vertexPath, const std::string& fragmentPath)
 {
-	std::string vertShader = get_file_contents(vertexPath);
-	std::string fragShader = get_file_contents(fragmentPath);
+	std::string vertShader = get_file_contents(vertexPath.c_str());
+	std::string fragShader = get_file_contents(fragmentPath.c_str());
 
 	// Vertex Shader source code
 	const char* vertexShaderSource = vertShader.c_str();

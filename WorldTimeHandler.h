@@ -14,13 +14,13 @@ public:
 	}
 
 	static inline int DeltaTimeMS() { return static_cast<int>(last_deltaTime * 100); }
-	static inline float DeltaTimeSec() { return last_deltaTime; }
+	static inline double DeltaTimeSec() { return last_deltaTime; }
 
 private:
 	static double last_time;
-	static float last_deltaTime;
+	static double last_deltaTime;
 };
 
 double WTH::last_time = 0.0f;
-float WTH::last_deltaTime = 0.0f;
+double WTH::last_deltaTime = 0.0f;
 

@@ -7,17 +7,17 @@ VBO::VBO(std::vector<Vertex>& vertices)
 	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);		//	Attaching the data to the buffer
 }
 
-void VBO::Bind()
+void VBO::Bind()const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, ID);
 }
 
-void VBO::UnBind()
+void VBO::UnBind()const
 {
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VBO::Delete()
+void VBO::Delete()const
 {
 	glDeleteBuffers(1, &ID);
 }

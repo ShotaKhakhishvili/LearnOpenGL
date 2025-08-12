@@ -7,13 +7,19 @@
 #include <iostream>
 #include <cerrno>
 
+struct ShaderParameters
+{
+	const std::string vertShader;
+	const std::string fragShader;
+};
+
 std::string get_file_contents(const char* filename);
 
 class Shader
 {
 public:
 	GLuint ID;
-	Shader(const char* vertexPath, const char* fragmentPath);
+	Shader(const std::string& vertexPath, const std::string& fragmentPath);
 
 	void Activate() const;
 	void Delete() const;
