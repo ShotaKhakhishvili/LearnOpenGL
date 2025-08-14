@@ -16,7 +16,7 @@ namespace Data
 	std::unordered_map<std::string, MaterialParameters> materialParameters =
 	{
 		{"Sword", MaterialParameters{"Default",	std::vector<std::string>{"Sword_BaseColor", "Sword_Roughness"}}},
-		{"Grass", MaterialParameters{"Default",	std::vector<std::string>{"Grass_BaseColor", "Sword_Roughness"}}},
+		{"Grass", MaterialParameters{"Default",	std::vector<std::string>{"Grass_BaseColor", "Plank_Roughness"}}},
 		{"Object", MaterialParameters{"Light",	std::vector<std::string>{"Plank_BaseColor", "Plank_Roughness"}}}
 	};
 

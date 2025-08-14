@@ -1,7 +1,7 @@
 #include "Mesh.h"
 #include "Data.h"
-#include "Object.h"
-#include "InstancedObject.h"
+#include "MeshComponent.h"
+#include "InstancedMeshComponent.h"
 #include "FuncLib.h"
 #include "WorldTimeHandler.h"
 
@@ -44,18 +44,43 @@ int main() {
 	// Set the viewport size and clear color
 	glViewport(0, 0, width, height);
 
-	InstancedObject grassField("Grass", "Grass");
+	InstancedMeshComponent* grassField = new InstancedMeshComponent("Grass", "Grass");
+	InstancedMeshComponent* swords = new InstancedMeshComponent("Sword", "Sword");
 
-	for (float i = 0; i < 14; i++)
+	MeshComponent* sword = new MeshComponent("Sword", "Sword");
+	sword->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	MeshComponent* sword1 = new MeshComponent("Sword", "Sword");
+	sword1->SetPosition(glm::vec3(1.0f, 5.0f, 1.0f));
+
+	sword->AddChild(sword1);
+
+	for (float i = 0; i < 140; i++)
 	{
-		for (float j = 0; j < 14; j++)
+		for (float j = 0; j < 140; j++)
 		{
-			grassField.AddInstance(Transform{ glm::vec3(i, 0.0f, j), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) });
+			grassField->AddInstance(Transform{ glm::vec3(i, 0.0f, j), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) });
+		}
+	}
+
+	for (float i = 0; i < 140/5; i++)
+	{
+		for (float j = 0; j < 140/5; j++)
+		{
+			swords->AddInstance(Transform{ glm::vec3(5 * i, 3.0f, 5 * j), glm::vec3(-90.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) });
 		}
 	}
 
 	// Enables the depth buffer
 	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_LESS);
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// Enable face culling
+	glEnable(GL_CULL_FACE);
+	// Cull back faces (default)
+	glCullFace(GL_BACK);
+	// Define which winding order means "front face"
+	glFrontFace(GL_CCW); // CCW = counter-clockwise is default
 
 	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
@@ -65,14 +90,19 @@ int main() {
 	{	
 		WTH::UpdateTime();
 		// Set the clear color to a dark blue shade
-		glClearColor(0.07f, 0.13f, 0.17f, 1.0f);
+		glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
 		// Clear the color and the depth buffers
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 		camera.Inputs(window, WTH::DeltaTimeSec());
 		camera.UpdateMatrix(45.0f, 0.01f, 500.0f);
 
-		grassField.DrawInstances(camera);
+		//grassField.DrawInstances(camera);
+		//swords.DrawInstances(camera);
+
+		sword->Draw(camera);
+		sword->AddRotation(glm::vec3(0.0f, WTH::DeltaTimeMS(), 0.0f));
+		sword1->Draw(camera);
 
 		// Swap the buffers to display the window
 		glfwSwapBuffers(window);
