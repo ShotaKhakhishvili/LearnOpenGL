@@ -1,11 +1,11 @@
-#include "InstancedMeshComponent.h"
+#include "UInstancedStaticMeshComponent.h"
 
-InstancedMeshComponent::InstancedMeshComponent(const std::string& meshName, const std::string& materialName)
+UInstancedStaticMeshComponent::UInstancedStaticMeshComponent(const std::string& meshName, const std::string& materialName)
 {
-	model = std::make_shared<Model>(meshName, materialName);
+	model = std::make_shared<UModel>(meshName, materialName);
 }
 
-void InstancedMeshComponent::DrawInstances(Camera& camera)
+void UInstancedStaticMeshComponent::Draw(UCamera& camera)
 {
     model->ActivateModel(camera);
 
@@ -21,7 +21,7 @@ void InstancedMeshComponent::DrawInstances(Camera& camera)
     }
 }
 
-void InstancedMeshComponent::AddInstance(const Transform& newInstTransform)
+void UInstancedStaticMeshComponent::AddInstance(const Transform& newInstTransform)
 {
     glm::mat4 translate = glm::translate(glm::mat4(1.0f), newInstTransform.Position);
     glm::mat4 rotation = glm::toMat4(glm::quat(glm::radians(newInstTransform.Rotation)));
@@ -31,7 +31,7 @@ void InstancedMeshComponent::AddInstance(const Transform& newInstTransform)
 }
 
 
-void InstancedMeshComponent::RemoveInstance(const unsigned int instIndex)
+void UInstancedStaticMeshComponent::RemoveInstance(const unsigned int instIndex)
 {
     if (instIndex < localInstanceMatrices.size()) {
         std::swap(localInstanceMatrices[instIndex], localInstanceMatrices.back());
@@ -39,13 +39,14 @@ void InstancedMeshComponent::RemoveInstance(const unsigned int instIndex)
     }
 }
 
-void InstancedMeshComponent::OnTransformChange()
+void UInstancedStaticMeshComponent::OnTransformChange()
 {
-    Component::OnTransformChange();
+    USceneComponent::OnTransformChange();
     dirtyInstanceMatrices = true;
 }
 
-void InstancedMeshComponent::RefreshMatrices()
+
+void UInstancedStaticMeshComponent::RefreshMatrices()
 {
     worldInstanceMatrices.resize(localInstanceMatrices.size());
     glm::mat4 baseWorld = GetWorldMatrix();

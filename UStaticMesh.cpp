@@ -1,6 +1,6 @@
-#include "Mesh.h"
+#include "UStaticMesh.h"
 
-Mesh::Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
+UStaticMesh::UStaticMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices)
 {
 	this->vertices = vertices;
 	this->indices = indices;

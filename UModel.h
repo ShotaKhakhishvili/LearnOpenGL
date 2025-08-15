@@ -1,17 +1,17 @@
 #pragma once
-#include "Material.h"
-#include "Mesh.h"
+#include "UMaterial.h"
+#include "UStaticMesh.h"
 
-class Model
+class UModel
 {
 public:
 
-	std::shared_ptr<Material> material;
-	std::shared_ptr<Mesh> mesh;
+	std::shared_ptr<UMaterial> material;
+	std::shared_ptr<UStaticMesh> mesh;
 
-	Model(const std::string& meshName, const std::string& materialName);
+	UModel(const std::string& meshName, const std::string& materialName);
 
-	void ActivateModel(Camera& camera);
+	void ActivateModel(UCamera& camera);
 
 	void SetupModel(const std::string& meshName, const std::string& materialName);
 

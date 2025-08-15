@@ -1,14 +1,15 @@
-#include "MeshComponent.h"
+#include "UStaticMeshComponent.h"
 #include "Data.h"
 #include "FuncLib.h"
+#include "UCamera.h"
 
-MeshComponent::MeshComponent(const std::string& meshName, const std::string& materialName)
+UStaticMeshComponent::UStaticMeshComponent(const std::string& meshName, const std::string& materialName)
 {
-	model = std::make_shared<Model>(meshName, materialName);
+	model = std::make_shared<UModel>(meshName, materialName);
 	RefreshMatrix();
 }
 
-void MeshComponent::Draw(Camera& camera)
+void UStaticMeshComponent::Draw(UCamera& camera)
 {
 	model->ActivateModel(camera);
 

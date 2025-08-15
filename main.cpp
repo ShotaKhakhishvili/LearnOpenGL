@@ -1,7 +1,7 @@
-#include "Mesh.h"
+#include "UStaticMesh.h"
 #include "Data.h"
-#include "MeshComponent.h"
-#include "InstancedMeshComponent.h"
+#include "UStaticMeshComponent.h"
+#include "UInstancedStaticMeshComponent.h"
 #include "FuncLib.h"
 #include "WorldTimeHandler.h"
 
@@ -44,13 +44,13 @@ int main() {
 	// Set the viewport size and clear color
 	glViewport(0, 0, width, height);
 
-	InstancedMeshComponent* grassField = new InstancedMeshComponent("Grass", "Grass");
-	InstancedMeshComponent* swords = new InstancedMeshComponent("Sword", "Sword");
+	UInstancedStaticMeshComponent* grassField = new UInstancedStaticMeshComponent("Grass", "Grass");
+	UInstancedStaticMeshComponent* swords = new UInstancedStaticMeshComponent("Sword", "Sword");
 
-	MeshComponent* sword = new MeshComponent("Sword", "Sword");
+	UStaticMeshComponent* sword = new UStaticMeshComponent("Sword", "Sword");
 	sword->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
-	MeshComponent* sword1 = new MeshComponent("Sword", "Sword");
-	sword1->SetPosition(glm::vec3(1.0f, 5.0f, 1.0f));
+	UStaticMeshComponent* sword1 = new UStaticMeshComponent("Sword", "Sword");
+	sword1->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
 
 	sword->AddChild(sword1);
 
@@ -82,7 +82,7 @@ int main() {
 	// Define which winding order means "front face"
 	glFrontFace(GL_CCW); // CCW = counter-clockwise is default
 
-	Camera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
+	UCamera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
 	WTH::UpdateTime();
 	// Main loop to keep the window open
@@ -97,11 +97,11 @@ int main() {
 		camera.Inputs(window, WTH::DeltaTimeSec());
 		camera.UpdateMatrix(45.0f, 0.01f, 500.0f);
 
-		//grassField.DrawInstances(camera);
-		//swords.DrawInstances(camera);
+		grassField->Draw(camera);
+		swords->Draw(camera);
 
-		sword->Draw(camera);
 		sword->AddRotation(glm::vec3(0.0f, WTH::DeltaTimeMS(), 0.0f));
+		sword->Draw(camera);
 		sword1->Draw(camera);
 
 		// Swap the buffers to display the window

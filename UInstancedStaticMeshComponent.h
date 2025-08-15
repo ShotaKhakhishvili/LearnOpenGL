@@ -1,19 +1,19 @@
 #pragma once
 
-#include "MeshComponent.h"
+#include "UStaticMeshComponent.h"
 
-class InstancedMeshComponent : public Component
+class UInstancedStaticMeshComponent : public USceneComponent
 {
-    std::shared_ptr<Model> model;
+    std::shared_ptr<UModel> model;
     std::vector<glm::mat4> localInstanceMatrices;
     std::vector<glm::mat4> worldInstanceMatrices;
 
     bool dirtyInstanceMatrices = true;
 
 public:
-    InstancedMeshComponent(const std::string& meshName, const std::string& materialName);
+    UInstancedStaticMeshComponent(const std::string& meshName, const std::string& materialName);
 
-    void DrawInstances(Camera& camera);
+    void Draw(UCamera& camera) override;
 
     void AddInstance(const Transform& newInstTransform);
     void RemoveInstance(const unsigned int instIndex);

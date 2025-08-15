@@ -137,19 +137,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Component.cpp" />
+    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="UActorComponent.cpp" />
+    <ClCompile Include="UCamera.cpp" />
+    <ClCompile Include="USceneComponent.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="EBO.cpp" />
     <ClCompile Include="glad.c" />
-    <ClCompile Include="InstancedMeshComponent.cpp" />
+    <ClCompile Include="UInstancedStaticMeshComponent.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="Model.cpp" />
-    <ClCompile Include="MeshComponent.cpp" />
+    <ClCompile Include="UStaticMesh.cpp" />
+    <ClCompile Include="UModel.cpp" />
+    <ClCompile Include="UObject.cpp" />
+    <ClCompile Include="UStaticMeshComponent.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb.cpp" />
-    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="UTexture.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
@@ -160,18 +163,21 @@
     <None Include="light.vert" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Camera.h" />
-    <ClInclude Include="Component.h" />
+    <ClInclude Include="AActor.h" />
+    <ClInclude Include="UActorComponent.h" />
+    <ClInclude Include="UCamera.h" />
+    <ClInclude Include="USceneComponent.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="EBO.h" />
     <ClInclude Include="FuncLib.h" />
-    <ClInclude Include="InstancedMeshComponent.h" />
-    <ClInclude Include="Material.h" />
-    <ClInclude Include="Mesh.h" />
-    <ClInclude Include="Model.h" />
-    <ClInclude Include="MeshComponent.h" />
+    <ClInclude Include="UInstancedStaticMeshComponent.h" />
+    <ClInclude Include="UMaterial.h" />
+    <ClInclude Include="UObject.h" />
+    <ClInclude Include="UStaticMesh.h" />
+    <ClInclude Include="UModel.h" />
+    <ClInclude Include="UStaticMeshComponent.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="Texture.h" />
+    <ClInclude Include="UTexture.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="WorldTimeHandler.h" />

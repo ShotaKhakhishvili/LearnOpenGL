@@ -1,28 +1,28 @@
-#include "Model.h"
+#include "UModel.h"
 #include "Data.h"
 
-Model::Model(const std::string& meshName, const std::string& materialName)
+UModel::UModel(const std::string& meshName, const std::string& materialName)
 {
 	SetupModel(meshName, materialName);
 }
 
-void Model::SetMesh(const std::string& meshName)
+void UModel::SetMesh(const std::string& meshName)
 {
 	mesh = Data::GetMesh(meshName);
 }
 
-void Model::SetMaterial(const std::string& materialName)
+void UModel::SetMaterial(const std::string& materialName)
 {
 	material = Data::GetMaterial(materialName);
 }
 
-void Model::SetupModel(const std::string& meshName, const std::string& materialName)
+void UModel::SetupModel(const std::string& meshName, const std::string& materialName)
 {
 	SetMaterial(materialName);
 	SetMesh(meshName);
 }
 
-void Model::ActivateModel(Camera& camera)
+void UModel::ActivateModel(UCamera& camera)
 {
 	material->shader->Activate();
 	mesh->VAO.Bind();
@@ -46,6 +46,6 @@ void Model::ActivateModel(Camera& camera)
 		material->textures[i]->Bind();
 	}
 
-	glUniform3f(glGetUniformLocation(material->shader->ID, "camPos"), camera.Position.x, camera.Position.y, camera.Position.z);
+	glUniform3f(glGetUniformLocation(material->shader->ID, "camPos"), camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
 	camera.Matrix(*(material->shader), "camMat");
 }

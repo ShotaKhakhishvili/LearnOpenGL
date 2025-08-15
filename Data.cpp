@@ -33,9 +33,9 @@ namespace Data
 		{"Object", MeshParameters{"Object.txt"}}
 	};
 	
-	std::unordered_map<std::string, std::shared_ptr<Texture>> loadedTextures;
+	std::unordered_map<std::string, std::shared_ptr<UTexture>> loadedTextures;
 	std::unordered_map<std::string, std::shared_ptr<Shader>> loadedShaders;
-	std::unordered_map<std::string, std::shared_ptr<Mesh>> loadedMeshes;
+	std::unordered_map<std::string, std::shared_ptr<UStaticMesh>> loadedMeshes;
 
 	std::shared_ptr<Shader> MakeShader(const std::string& shaderName, const ShaderParameters& parameters, bool replaceIfAlreadyExists)
 	{
@@ -47,7 +47,7 @@ namespace Data
 		return newShader;
 	}
 
-	std::shared_ptr<Texture> GetTexture(const std::string& textureName)
+	std::shared_ptr<UTexture> GetTexture(const std::string& textureName)
 	{
 		auto texEntry = loadedTextures.find(textureName);
 		if (texEntry != loadedTextures.end())	// The texture is already loaded.
@@ -58,14 +58,14 @@ namespace Data
 		if (texParams == textureParameters.end())
 			throw std::runtime_error("Tried To Access Imaginary Texture Parameters. Texture Name: " + textureName); // Some texture data was not found
 		
-		auto tex = std::make_shared<Texture>(texParams->second);
+		auto tex = std::make_shared<UTexture>(texParams->second);
 		loadedTextures.emplace(textureName, tex);
 		return tex;
 	}
 
-	std::vector<std::shared_ptr<Texture>> GetTextures(const std::vector<std::string>& textureNames)
+	std::vector<std::shared_ptr<UTexture>> GetTextures(const std::vector<std::string>& textureNames)
 	{
-		std::vector<std::shared_ptr<Texture>> textures;
+		std::vector<std::shared_ptr<UTexture>> textures;
 		textures.reserve(textureNames.size());
 
 		for (const auto& textureName : textureNames)
@@ -76,16 +76,16 @@ namespace Data
 		return textures;
 	}
 
-	std::shared_ptr<Material> GetMaterial(const std::string& materialName)
+	std::shared_ptr<UMaterial> GetMaterial(const std::string& materialName)
 	{
 		auto materialEntry = materialParameters.find(materialName);
 		if (materialEntry == materialParameters.end())
 			throw std::runtime_error("Tried To Access Imaginary Material Parameters. Material Name: " + materialName);
 
-		return std::make_shared<Material>(GetShader(materialEntry->second.shaderName), GetTextures(materialEntry->second.textures));
+		return std::make_shared<UMaterial>(GetShader(materialEntry->second.shaderName), GetTextures(materialEntry->second.textures));
 	}
 
-	std::shared_ptr<Mesh> GetMesh(const std::string& meshName)
+	std::shared_ptr<UStaticMesh> GetMesh(const std::string& meshName)
 	{
 		auto meshEntry = loadedMeshes.find(meshName);
 		if (meshEntry != loadedMeshes.end()) return meshEntry->second;	// The mesh was found and returned
@@ -98,7 +98,7 @@ namespace Data
 		std::vector<GLuint> indices;
 		ReadFromObjIntoVectors(meshParams->second.meshName, vertices, indices);
 		
-		auto mesh = std::make_shared<Mesh>(vertices, indices);
+		auto mesh = std::make_shared<UStaticMesh>(vertices, indices);
 		loadedMeshes.emplace(meshName, mesh);
 		
 		return mesh;

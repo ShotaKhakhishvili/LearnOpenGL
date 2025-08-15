@@ -1,16 +1,16 @@
 #pragma once
 
+#include "UObject.h"
 #include "VAO.h"
 #include "EBO.h"
-#include "Texture.h"
-#include "Camera.h"
+#include "UTexture.h"
 
 struct MeshParameters
 {
 	std::string meshName;
 };
 
-class Mesh
+class UStaticMesh 
 {
 public:
 	std::vector<Vertex> vertices;
@@ -18,6 +18,6 @@ public:
 
 	VAO VAO;
 
-	Mesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices);
+	UStaticMesh(std::vector<Vertex>& vertices, std::vector<GLuint>& indices);
 };
 

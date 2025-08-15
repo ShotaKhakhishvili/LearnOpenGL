@@ -1,6 +1,7 @@
 #pragma once
 #include "Shader.h"
-#include "Texture.h"
+#include "UTexture.h"
+#include "UCamera.h"
 #include <vector>
 #include <unordered_map>
 
@@ -10,12 +11,12 @@ struct MaterialParameters
 	std::vector<std::string> textures;
 };
 
-class Material {
+class UMaterial {
 public:
     std::shared_ptr<Shader> shader; 
-	std::vector<std::shared_ptr<Texture>> textures;
+	std::vector<std::shared_ptr<UTexture>> textures;
 
-	Material(const std::shared_ptr<Shader>& shaderIn, const std::vector<std::shared_ptr<Texture>>& texturesIn)
+	UMaterial(const std::shared_ptr<Shader>& shaderIn, const std::vector<std::shared_ptr<UTexture>>& texturesIn)
 		: shader(shaderIn), textures(texturesIn)
 	{
 

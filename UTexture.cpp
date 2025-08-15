@@ -1,6 +1,6 @@
-#include "Texture.h"
+#include "UTexture.h"
 
-Texture::Texture(const TextureParameters& params)
+UTexture::UTexture(const TextureParameters& params)
 {
 	type = params.texType;
 
@@ -28,25 +28,25 @@ Texture::Texture(const TextureParameters& params)
 
 
 // Selects a shader uniform sampler to use a specified texture unit
-void Texture::TexUnit(Shader& shader, const char* uniform, unsigned int unit)
+void UTexture::TexUnit(Shader& shader, const char* uniform, unsigned int unit)
 {
 	GLuint texUniform = glGetUniformLocation(shader.ID, uniform);		// Gets the location of the sampler	
 	shader.Activate();													// Activates the shader program
 	glUniform1i(texUniform, unit);										// Sets the sampler uniform to use the specified texture unit
 }
 
-void Texture::Bind()
+void UTexture::Bind()
 {
 	glActiveTexture(GL_TEXTURE0 + unit);
 	glBindTexture(GL_TEXTURE_2D, ID);
 }
 
-void Texture::UnBind()
+void UTexture::UnBind()
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Texture::Delete()
+void UTexture::Delete()
 {
 	glDeleteTextures(1, &ID);
 }

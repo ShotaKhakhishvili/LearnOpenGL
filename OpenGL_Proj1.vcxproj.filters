@@ -22,6 +22,21 @@
     <Filter Include="Resource Files\Models">
       <UniqueIdentifier>{a8d2375c-dd53-4d74-9fc4-f09f8c1e04ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\UObjects">
+      <UniqueIdentifier>{39129e6b-960a-42ec-a7e8-15a7c9798379}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UObjects">
+      <UniqueIdentifier>{13d4b96a-26f7-4d5f-a421-ab03c7584640}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Low">
+      <UniqueIdentifier>{b41fbc4c-4915-444f-9588-4c278b8a08a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Low">
+      <UniqueIdentifier>{a9e3e95c-d57e-4762-8c0a-19822a6d1383}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\AActors">
+      <UniqueIdentifier>{22e5ec66-7d07-4de1-9f1d-62528ba1c12a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -30,44 +45,53 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EBO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="VAO.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="stb.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MeshComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Data.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Model.cpp">
+    <ClCompile Include="Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InstancedMeshComponent.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="UObject.cpp">
+      <Filter>Source Files\UObjects</Filter>
     </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="USceneComponent.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UStaticMeshComponent.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UModel.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UTexture.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UStaticMesh.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UInstancedStaticMeshComponent.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EBO.cpp">
+      <Filter>Source Files\Low</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Source Files\Low</Filter>
+    </ClCompile>
+    <ClCompile Include="VAO.cpp">
+      <Filter>Source Files\Low</Filter>
+    </ClCompile>
+    <ClCompile Include="VBO.cpp">
+      <Filter>Source Files\Low</Filter>
+    </ClCompile>
+    <ClCompile Include="stb.cpp">
+      <Filter>Source Files\Low</Filter>
+    </ClCompile>
+    <ClCompile Include="UCamera.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UActorComponent.cpp">
+      <Filter>Source Files\UObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,50 +109,59 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EBO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="VAO.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="WorldTimeHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FuncLib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MeshComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="USceneComponent.h">
+      <Filter>Header Files\UObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Model.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UInstancedStaticMeshComponent.h">
+      <Filter>Header Files\UObjects</Filter>
     </ClInclude>
-    <ClInclude Include="InstancedMeshComponent.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UMaterial.h">
+      <Filter>Header Files\UObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="UObject.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="UStaticMesh.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="UStaticMeshComponent.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="UModel.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="UTexture.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="EBO.h">
+      <Filter>Header Files\Low</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Header Files\Low</Filter>
+    </ClInclude>
+    <ClInclude Include="VAO.h">
+      <Filter>Header Files\Low</Filter>
+    </ClInclude>
+    <ClInclude Include="VBO.h">
+      <Filter>Header Files\Low</Filter>
+    </ClInclude>
+    <ClInclude Include="UCamera.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="AActor.h">
+      <Filter>Header Files\AActors</Filter>
+    </ClInclude>
+    <ClInclude Include="UActorComponent.h">
+      <Filter>Header Files\UObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

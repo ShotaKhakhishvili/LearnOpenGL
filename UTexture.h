@@ -13,14 +13,14 @@ struct TextureParameters
 	GLenum pixelType;
 };
 
-class Texture
+class UTexture
 {
 public:
 	GLuint ID;
 	std::string type;
 	GLuint unit;
 
-	Texture(const TextureParameters& textureParameters);
+	UTexture(const TextureParameters& textureParameters);
 
 	void TexUnit(Shader& shader, const char* uniform, unsigned int unit); // Selects a shader uniform sampler to use a specified texture unit
 	void Bind();

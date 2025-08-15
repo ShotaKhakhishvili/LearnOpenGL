@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Mesh.h"
+#include "UStaticMesh.h"
 #include <fstream>
 #include <sstream>
 #include <string>
