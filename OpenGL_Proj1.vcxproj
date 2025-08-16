@@ -137,7 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AActor.cpp" />
     <ClCompile Include="UActorComponent.cpp" />
     <ClCompile Include="UCamera.cpp" />
     <ClCompile Include="USceneComponent.cpp" />
@@ -153,6 +153,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="stb.cpp" />
     <ClCompile Include="UTexture.cpp" />
+    <ClCompile Include="UWorld.cpp" />
     <ClCompile Include="VAO.cpp" />
     <ClCompile Include="VBO.cpp" />
   </ItemGroup>
@@ -178,6 +179,7 @@
     <ClInclude Include="UStaticMeshComponent.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="UTexture.h" />
+    <ClInclude Include="UWorld.h" />
     <ClInclude Include="VAO.h" />
     <ClInclude Include="VBO.h" />
     <ClInclude Include="WorldTimeHandler.h" />

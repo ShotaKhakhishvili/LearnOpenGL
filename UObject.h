@@ -1,32 +1,28 @@
 #pragma once
 
-#include "AActor.h"
 #include <vector>
 #include <string>
+
+class UWorld;
 
 class UObject
 {
 private:
 
-	static std::vector<UObject*> GObjectArray;
-	static std::vector<UObject*> roots;
-	static unsigned int iObjectCount;
-
-	static void AddRoot(UObject* newRoot);	
-	static void RemoveRoot(UObject* rootToRem);
-
 	const std::string name;
+	UWorld* world;
 	bool bMarkedForGC;
 	bool bPendingToKill;
 
-	friend class AActor;
+	friend class UWorld;
 
 public:
 	UObject();
+	virtual ~UObject();
 
-	static void CollectGarbage();
+	void SetWorld(UWorld* newWorld);
+	UWorld* GetWorld() const;
 
 	virtual void CollectReferences(std::vector<UObject*>& outRefs) {}
-	virtual ~UObject();
 };
 

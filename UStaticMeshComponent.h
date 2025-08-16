@@ -10,9 +10,8 @@ class UStaticMeshComponent : public USceneComponent
 private:
 	std::shared_ptr<UModel> model;
 
+	void Draw(UCamera& camera) override;
 public:
 
 	UStaticMeshComponent(const std::string& meshName, const std::string& materialName);
-
-	void Draw(UCamera& camera) override;
 };

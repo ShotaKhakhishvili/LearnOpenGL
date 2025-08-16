@@ -66,18 +66,6 @@ bool USceneComponent::AddChild(USceneComponent* child)
 	return child->SetParent(this);
 }
 
-void USceneComponent::Destroy()
-{
-	if (parent)
-	{
-		auto& siblings = parent->children;
-		siblings.erase(std::remove(siblings.begin(), siblings.end(), this), siblings.end());
-		parent = nullptr;
-	}
-
-	delete this;
-}
-
 void USceneComponent::Draw(UCamera& camera)
 {
 }

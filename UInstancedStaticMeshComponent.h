@@ -10,14 +10,14 @@ class UInstancedStaticMeshComponent : public USceneComponent
 
     bool dirtyInstanceMatrices = true;
 
+    void Draw(UCamera& camera) override;
+    void RefreshMatrices();
+
 public:
     UInstancedStaticMeshComponent(const std::string& meshName, const std::string& materialName);
-
-    void Draw(UCamera& camera) override;
 
     void AddInstance(const Transform& newInstTransform);
     void RemoveInstance(const unsigned int instIndex);
 
     void OnTransformChange() override;
-    void RefreshMatrices();
 };

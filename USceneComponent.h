@@ -9,6 +9,7 @@
 #include <glm/gtx/vector_angle.hpp>
 
 class UCamera;
+class UWorld;
 
 struct Transform
 {
@@ -29,6 +30,11 @@ class USceneComponent : public UActorComponent
 	USceneComponent* parent;
 	std::vector<USceneComponent*> children;
 
+	virtual void Draw(UCamera& camera);
+	void RefreshMatrix();
+
+	friend class UWorld;
+
 public:
 
 	USceneComponent();
@@ -37,8 +43,6 @@ public:
 
 	USceneComponent* GetParent();
 	const std::vector<USceneComponent*>& GetChildren();
-
-	void RefreshMatrix();
 
 	void SetRotation(glm::vec3 newRot);
 	void SetRotationInQuat(glm::quat newRot);
@@ -60,8 +64,5 @@ public:
 
 	bool SetParent(USceneComponent* newParent);
 	bool AddChild(USceneComponent* child);
-	void Destroy();
-
-	virtual void Draw(UCamera& camera);
 };
 

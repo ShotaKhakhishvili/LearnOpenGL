@@ -2,6 +2,7 @@
 #include "Data.h"
 #include "UStaticMeshComponent.h"
 #include "UInstancedStaticMeshComponent.h"
+#include "UWorld.h"
 #include "FuncLib.h"
 #include "WorldTimeHandler.h"
 
@@ -51,7 +52,6 @@ int main() {
 	sword->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
 	UStaticMeshComponent* sword1 = new UStaticMeshComponent("Sword", "Sword");
 	sword1->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
-
 	sword->AddChild(sword1);
 
 	for (float i = 0; i < 140; i++)
@@ -85,6 +85,11 @@ int main() {
 	UCamera camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
 	WTH::UpdateTime();
+
+	UWorld* world = new UWorld();
+	world->RegisterObject(sword);
+	world->SpawnActor<AActor>(Transform{ glm::vec3(5.0f, 3.0f, 5.0f), glm::vec3(-90.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) });
+
 	// Main loop to keep the window open
 	while (!glfwWindowShouldClose(window))
 	{	
@@ -97,12 +102,7 @@ int main() {
 		camera.Inputs(window, WTH::DeltaTimeSec());
 		camera.UpdateMatrix(45.0f, 0.01f, 500.0f);
 
-		grassField->Draw(camera);
-		swords->Draw(camera);
-
-		sword->AddRotation(glm::vec3(0.0f, WTH::DeltaTimeMS(), 0.0f));
-		sword->Draw(camera);
-		sword1->Draw(camera);
+		world->Tick(camera);
 
 		// Swap the buffers to display the window
 		glfwSwapBuffers(window);

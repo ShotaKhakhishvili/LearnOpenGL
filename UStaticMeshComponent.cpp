@@ -6,7 +6,6 @@
 UStaticMeshComponent::UStaticMeshComponent(const std::string& meshName, const std::string& materialName)
 {
 	model = std::make_shared<UModel>(meshName, materialName);
-	RefreshMatrix();
 }
 
 void UStaticMeshComponent::Draw(UCamera& camera)

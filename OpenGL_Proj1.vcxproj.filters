@@ -37,6 +37,9 @@
     <Filter Include="Header Files\AActors">
       <UniqueIdentifier>{22e5ec66-7d07-4de1-9f1d-62528ba1c12a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\AActors">
+      <UniqueIdentifier>{b0d1f3ce-475e-4990-8d05-b949bc95e442}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glad.c">
@@ -46,9 +49,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Data.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Actor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UObject.cpp">
@@ -92,6 +92,12 @@
     </ClCompile>
     <ClCompile Include="UActorComponent.cpp">
       <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="UWorld.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="AActor.cpp">
+      <Filter>Source Files\AActors</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +167,9 @@
       <Filter>Header Files\AActors</Filter>
     </ClInclude>
     <ClInclude Include="UActorComponent.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="UWorld.h">
       <Filter>Header Files\UObjects</Filter>
     </ClInclude>
   </ItemGroup>

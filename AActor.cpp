@@ -19,3 +19,5 @@ void AActor::DettachActorComponent(const UActorComponent* compToDettach)
 void AActor::AttachActorComponent(const UActorComponent* compToAttach)
 {
 }
+
+USceneComponent* AActor::GetRoot() const { return rootComponent; }
