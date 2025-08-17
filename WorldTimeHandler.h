@@ -13,7 +13,7 @@ public:
 		last_time = seconds;
 	}
 
-	static inline int DeltaTimeMS() { return static_cast<int>(last_deltaTime * 100); }
+	static inline int DeltaTimeMS() { return static_cast<int>(last_deltaTime * 1000); }
 	static inline double DeltaTimeSec() { return last_deltaTime; }
 
 private:

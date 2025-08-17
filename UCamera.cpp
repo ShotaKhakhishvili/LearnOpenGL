@@ -5,7 +5,7 @@
 UCamera::UCamera(int width, int height, glm::vec3 position)
     : USceneComponent(), width(width), height(height), firstClick(true)
 {
-    SetPosition(position); // uses USceneComponent transform system
+    SetLocation(position); // uses USceneComponent transform system
 }
 
 void UCamera::UpdateMatrix(float FOVdeg, float nearPlane, float farPlane)
@@ -46,12 +46,12 @@ void UCamera::Inputs(GLFWwindow* window, float deltaTime)
     glm::vec3 right = glm::normalize(glm::cross(forward, worldUp));
 
     // Keyboard movement
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) AddPosition(forward * velocity);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) AddPosition(-forward * velocity);
-    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) AddPosition(right * velocity);
-    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) AddPosition(-right * velocity);
-    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) AddPosition(worldUp * velocity);
-    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) AddPosition(-worldUp * velocity);
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) OffsetLocation(forward * velocity);
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) OffsetLocation(-forward * velocity);
+    if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS) OffsetLocation(right * velocity);
+    if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS) OffsetLocation(-right * velocity);
+    if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS) OffsetLocation(worldUp * velocity);
+    if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS) OffsetLocation(-worldUp * velocity);
 
     // Speed control
     if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS) speed = 20.0f;

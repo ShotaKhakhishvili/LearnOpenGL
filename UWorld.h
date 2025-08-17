@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UObject.h"
+#include "URenderer.h"
 #include "AActor.h"
 #include "UCamera.h"
 #include <memory>
@@ -10,6 +11,7 @@ class UWorld
 private:
     std::vector<UObject*> GObjectArray; // all objects in this world
     std::vector<AActor*> actors;        // objects that should never be GC'd
+    UCamera* mainCamera;
     unsigned int iObjectCount = 0;
 
 public:
@@ -55,7 +57,7 @@ inline T* UWorld::GetActorOfClass()
 {
     for (const auto& actor : actors)
     {
-        if (T* casted = dynamic_cast<T*>(actor.get()))
+        if (T* casted = dynamic_cast<T*>(actor))
             return actor;
     }
     return nullptr;

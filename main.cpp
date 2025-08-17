@@ -49,9 +49,9 @@ int main() {
 	UInstancedStaticMeshComponent* swords = new UInstancedStaticMeshComponent("Sword", "Sword");
 
 	UStaticMeshComponent* sword = new UStaticMeshComponent("Sword", "Sword");
-	sword->SetPosition(glm::vec3(0.0f, 5.0f, 0.0f));
+	sword->SetLocation(glm::vec3(0.0f, 5.0f, 0.0f));
 	UStaticMeshComponent* sword1 = new UStaticMeshComponent("Sword", "Sword");
-	sword1->SetPosition(glm::vec3(0.0f, 2.0f, 0.0f));
+	sword1->SetLocation(glm::vec3(0.0f, 2.0f, 0.0f));
 	sword->AddChild(sword1);
 
 	for (float i = 0; i < 140; i++)
@@ -88,7 +88,10 @@ int main() {
 
 	UWorld* world = new UWorld();
 	world->RegisterObject(sword);
-	world->SpawnActor<AActor>(Transform{ glm::vec3(5.0f, 3.0f, 5.0f), glm::vec3(-90.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) });
+	world->RegisterObject(grassField);
+	world->RegisterObject(swords);
+	AActor* actor = world->SpawnActor<AActor>(Transform{ glm::vec3(5.0f, 3.0f, 5.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 1.0f, 1.0f) });
+	actor->AttachActorComponent(sword);
 
 	// Main loop to keep the window open
 	while (!glfwWindowShouldClose(window))
@@ -98,18 +101,18 @@ int main() {
 		glClearColor(0.85f, 0.85f, 0.85f, 1.0f);
 		// Clear the color and the depth buffers
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
+	
 		camera.Inputs(window, WTH::DeltaTimeSec());
 		camera.UpdateMatrix(45.0f, 0.01f, 500.0f);
-
+	
 		world->Tick(camera);
-
+		actor->OffsetActorRotation(glm::vec3(0.0f, WTH::DeltaTimeMS() / 10.0f, 0.0f));
+	
 		// Swap the buffers to display the window
 		glfwSwapBuffers(window);
 		// Poll for events (like keyboard input, mouse movement, etc.)
 		glfwPollEvents();
 	}
-
 	// Clean up and close the window
 
 	glfwDestroyWindow(window); // Destroy the window

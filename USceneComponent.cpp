@@ -82,15 +82,15 @@ void USceneComponent::RefreshMatrix()
 
 void USceneComponent::SetRotation(glm::vec3 newRot)			{ rotation = glm::quat(glm::radians(newRot));					OnTransformChange(); }
 void USceneComponent::SetRotationInQuat(glm::quat newRot)	{ rotation = newRot;											OnTransformChange(); }
-void USceneComponent::AddRotation(glm::vec3 deltaRot)		{ rotation = glm::quat(glm::radians(deltaRot)) * rotation;		OnTransformChange(); }
-void USceneComponent::SetPosition(glm::vec3 newPos)			{ position = newPos;											OnTransformChange(); }
-void USceneComponent::AddPosition(glm::vec3 deltaPos)		{ position += deltaPos;											OnTransformChange(); }
+void USceneComponent::OffsetRotation(glm::vec3 deltaRot)	{ rotation = glm::quat(glm::radians(deltaRot)) * rotation;		OnTransformChange(); }
+void USceneComponent::SetLocation(glm::vec3 newPos)			{ position = newPos;											OnTransformChange(); }
+void USceneComponent::OffsetLocation(glm::vec3 deltaPos)	{ position += deltaPos;											OnTransformChange(); }
 void USceneComponent::SetScale(glm::vec3 newScale)			{ scale = newScale;												OnTransformChange(); }
-void USceneComponent::AddScale(glm::vec3 deltaScale)		{ scale += deltaScale;											OnTransformChange(); }
+void USceneComponent::OffsetScale(glm::vec3 deltaScale)		{ scale += deltaScale;											OnTransformChange(); }
 
 inline void USceneComponent::OnTransformChange() { dirtyMatrix = true; }
 
-glm::vec3 USceneComponent::GetPosition()const		{ return position;									}
+glm::vec3 USceneComponent::GetLocation()const		{ return position;									}
 glm::vec3 USceneComponent::GetRotation()const		{ return glm::degrees(glm::eulerAngles(rotation));	}
 glm::quat USceneComponent::GetRotationInQuat()const { return rotation;									}
 glm::vec3 USceneComponent::GetScale()const			{ return scale;										}
@@ -104,4 +104,4 @@ glm::mat4 USceneComponent::GetWorldMatrix()
 	return mat;
 }
 
-Transform USceneComponent::GetTransform()const { return Transform{ GetPosition(), GetRotation(), GetScale() }; }
+Transform USceneComponent::GetTransform()const { return Transform{ GetLocation(), GetRotation(), GetScale() }; }

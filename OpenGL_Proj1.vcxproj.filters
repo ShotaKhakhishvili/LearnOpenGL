@@ -99,6 +99,9 @@
     <ClCompile Include="AActor.cpp">
       <Filter>Source Files\AActors</Filter>
     </ClCompile>
+    <ClCompile Include="URenderer.cpp">
+      <Filter>Source Files\UObjects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="default.vert">
@@ -170,6 +173,9 @@
       <Filter>Header Files\UObjects</Filter>
     </ClInclude>
     <ClInclude Include="UWorld.h">
+      <Filter>Header Files\UObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="URenderer.h">
       <Filter>Header Files\UObjects</Filter>
     </ClInclude>
   </ItemGroup>

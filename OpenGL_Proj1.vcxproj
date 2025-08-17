@@ -140,6 +140,7 @@
     <ClCompile Include="AActor.cpp" />
     <ClCompile Include="UActorComponent.cpp" />
     <ClCompile Include="UCamera.cpp" />
+    <ClCompile Include="URenderer.cpp" />
     <ClCompile Include="USceneComponent.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="EBO.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="AActor.h" />
     <ClInclude Include="UActorComponent.h" />
     <ClInclude Include="UCamera.h" />
+    <ClInclude Include="URenderer.h" />
     <ClInclude Include="USceneComponent.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="EBO.h" />

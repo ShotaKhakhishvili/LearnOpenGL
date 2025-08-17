@@ -46,15 +46,15 @@ public:
 
 	void SetRotation(glm::vec3 newRot);
 	void SetRotationInQuat(glm::quat newRot);
-	void AddRotation(glm::vec3 deltaRot);
-	void SetPosition(glm::vec3 newPos);
-	void AddPosition(glm::vec3 deltaPos);
+	void OffsetRotation(glm::vec3 deltaRot);
+	void SetLocation(glm::vec3 newPos);
+	void OffsetLocation(glm::vec3 deltaPos);
 	void SetScale(glm::vec3 newScale);
-	void AddScale(glm::vec3 deltaScale);
+	void OffsetScale(glm::vec3 deltaScale);
 
 	glm::vec3 GetRotation()const;
 	glm::quat GetRotationInQuat()const;
-	glm::vec3 GetPosition()const;
+	glm::vec3 GetLocation()const;
 	glm::vec3 GetScale()const;
 	glm::mat4 GetMatrix();
 	glm::mat4 GetWorldMatrix();

@@ -22,7 +22,7 @@ void UWorld::DestroyActor(AActor* actor)
 
 void UWorld::Tick(UCamera& camera)
 {
-    int i = 0;
+    static int i = 0;
     for (auto* object : GObjectArray)
     {
         if (USceneComponent* sceneComp = dynamic_cast<USceneComponent*>(object))

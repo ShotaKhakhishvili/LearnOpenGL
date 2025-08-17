@@ -46,6 +46,6 @@ void UModel::ActivateModel(UCamera& camera)
 		material->textures[i]->Bind();
 	}
 
-	glUniform3f(glGetUniformLocation(material->shader->ID, "camPos"), camera.GetPosition().x, camera.GetPosition().y, camera.GetPosition().z);
+	glUniform3f(glGetUniformLocation(material->shader->ID, "camPos"), camera.GetLocation().x, camera.GetLocation().y, camera.GetLocation().z);
 	camera.Matrix(*(material->shader), "camMat");
 }
